@@ -86,8 +86,9 @@ with my_expander_3:
 if st.button('Avaliar crédito'):
     
 	if avaliar_mau(dict_respostas):
-		st.success('Crédito aprovado')
-	else:
 		st.error('Crédito negado')
+	else:
+		st.success('Crédito aprovado')
+
 
 
