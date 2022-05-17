@@ -5,7 +5,7 @@ from utils import Transformador
 # from imblearn.over_sampling import SMOTE
 
 def avaliar_mau(dict_respostas):
-	modelo = load('obj/modelos_salvo2.joblib')
+	modelo = load('obj/modelo_salvo2.joblib')
 	features = load('obj/features.joblib')
 
 	if dict_respostas['Anos_desempregado'] > 0:
