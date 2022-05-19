@@ -1,0 +1,5 @@
+Modelos,Search,AUC ,KS ,BonsXBons,BonsXMaus,MausXBons,MausXMaus,acc ,precision 0 ,precision 1 
+RandomForestClassifier,RandomSearchCV,"0,839","0,97",5511,46,91,38,"0,98","0,98","0,45"
+DecisionTreeClassifier,RandomSearchCV,"0,72","0,946",5460,97,87,43,"0,97","0,98","0,31"
+DecisionTreeClassifier,GridSearchCV,"0,72","0,946",5460,97,87,43,"0,97","0,98","0,31"
+RandomForestClassifier,GridSearchCV,"0,838","0,969",5508,49,92,38,"0,98","0,98","0,44"

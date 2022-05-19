@@ -1,0 +1,5 @@
+Modelos,AUC ,KS ,BonsXBons,BonsXMaus,MausXBons,MausXMaus,acc ,precision 0 ,precision 1 
+KNeighborsClassifier(5),,,5074,483,71,58,"0,9","0,99","0,11"
+LogisticRegression(),"0,58","0,129",3044,2513,54,75,"0,55","0,98","0,03"
+DecisionTreeClassifier(),"0,75","0,94",5468,89,79,50,"0,97","0,99","0,36"
+RandomForestClassifier(),"0,82","0,96",5506,51,82,47,"0,98","0,98","0,48"
