@@ -45,6 +45,8 @@ python -m streamlit run simular_credito.py
 Notebook 1: <a href="https://github.com/HammadN98/credito_bancario/blob/main/notebooks/Analise.ipynb">Analises</a>
 
 
+
+
 Notebook 2: <a href="https://github.com/HammadN98/credito_bancario/blob/main/notebooks/Modelos.ipynb">Modelos</a>
 
 
