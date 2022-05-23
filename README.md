@@ -44,6 +44,7 @@ python -m streamlit run simular_credito.py
 
 Notebook 1: <a href="https://github.com/HammadN98/credito_bancario/blob/main/notebooks/Analise.ipynb">Analises</a>
 
+    O objetivo deste notebook era fazer a análise dos dados, a extração de insights e o entendimento de negócio.
 
 
 
@@ -56,4 +57,5 @@ Notebook 2: <a href="https://github.com/HammadN98/credito_bancario/blob/main/not
 **Em construção**
 ## Aprendizados
 
+  * Utilizar o framework streamlit
 **Em construção**
