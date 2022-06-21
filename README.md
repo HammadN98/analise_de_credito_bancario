@@ -14,7 +14,7 @@ Para usar a aplicação acesse:
 ```bash
   https://share.streamlit.io/hammadn98/credito_bancario/main/simular_credito.py
 ```
-Nota: No momento o próprio steam lit está apresentando problemas com a biblioteca joblib. Logo o endereço acima não está funcionando.
+Nota: No momento o próprio steamlit está apresentando problemas com a biblioteca joblib. Logo o endereço acima não está funcionando.
 
 Para usar a aplicação local use os seguintes comandos:
 
