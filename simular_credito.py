@@ -2,7 +2,7 @@ import streamlit as st
 from joblib import load
 import pandas as pd
 from utils import Transformador
-from imblearn.over_sampling import SMOTE
+#from imblearn.over_sampling import SMOTE
 
 def avaliar_mau(dict_respostas):
 	modelo = load('obj/modelo_salvo2.joblib')
