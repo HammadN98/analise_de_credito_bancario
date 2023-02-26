@@ -24,14 +24,14 @@ Para usar a aplicação acesse:
 
 ## Apêndice
 
-Notebook 1: <a href="https://github.com/HammadN98/credito_bancario/blob/main/notebooks/Analise.ipynb">Analises</a>
+Notebook 1: <a href="hhttps://github.com/HammadN98/analise_de_credito_bancario/blob/main/notebooks/Analise.ipynb">Analises</a>
 
     O objetivo deste notebook era fazer a análise dos dados, 
     a extração de insights e o entendimento de negócio.
 
 
 
-Notebook 2: <a href="https://github.com/HammadN98/credito_bancario/blob/main/notebooks/Modelos.ipynb">Modelos</a>
+Notebook 2: <a href="https://github.com/HammadN98/analise_de_credito_bancario/blob/main/notebooks/Modelos.ipynb">Modelos</a>
 
 
 
