@@ -2,7 +2,9 @@
 # Análise de crédito bancário  
 
 
-Este projeto é composto por uma análise de dados, pela exploração de dados e de modelos de machine learning. Assim como um modelo colocado em produção e pronto para ser usado. 
+## Descrição
+
+Este projeto de análise de crédito bancário para simular o sistema de verificação de empréstimo bancário, é composto por uma análise de dados, pela exploração de dados e de modelos de machine learning. Assim como um modelo colocado em produção e pronto para ser usado.
 
 **Em construção**
 
