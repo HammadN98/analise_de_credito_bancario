@@ -8,7 +8,9 @@ Este projeto de análise de crédito bancário para simular o sistema de verific
 
 ## Conjunto de dados
 
-O conjunto de dados utilizado foi disponibilizados pela Alura, link abaixo. 
+O conjunto de dados utilizado foi disponibilizados pela Alura, link abaixo.
+
+https://raw.githubusercontent.com/alura-cursos/Avaliacao_Credito/main/dados/clientes_cadastrados.csv
 
 
 ## Aplicação
