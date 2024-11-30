@@ -25,7 +25,7 @@ O projeto aborda um problema crítico enfrentado pelo setor financeiro: **identi
 ### **Distribuição das Variáveis Quantitativas**  
 As distribuições foram analisadas e ajustadas para excluir outliers, como no caso de `Rendimento_Anual`, onde valores extremos acima de R$ 700.000 foram tratados.  
 
-![Boxplot de Rendimento](https://github.com/HammadN98/analise_de_credito_bancario/blob/main/img/rendimento%20anual_bank.png)  
+<img src="https://github.com/HammadN98/analise_de_credito_bancario/blob/main/img/rendimento%20anual_bank.png" width="600"/>
 
 ---
 
@@ -71,13 +71,12 @@ A maior parte dos atrasos foi registrada na faixa de **1-29 dias**, indicando qu
 | Pagamento Realizado      | 442.031               | 42%        |  
 | 1-29 dias                | 383.120               | 37%        |  
 
-![Distribuição de Atrasos](https://github.com/HammadN98/analise_de_credito_bancario/blob/main/img/atraso_bank.png)  
 <img src="https://github.com/HammadN98/analise_de_credito_bancario/blob/main/img/atraso_bank.png" width="600"/>
 
 ### **Análise Vintage: Taxa de Inadimplência ao Longo do Tempo**  
 Clientes com maior tempo de relacionamento (MOB > 10 meses) apresentaram aumento na inadimplência.  
 
-![Curva Vintage](https://github.com/HammadN98/analise_de_credito_bancario/blob/main/img/mob_bank.png)  
+<img src="https://github.com/HammadN98/analise_de_credito_bancario/blob/main/img/mob_bank.png" width="600"/>
 
 ---
 
