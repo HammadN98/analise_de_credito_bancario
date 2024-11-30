@@ -54,7 +54,7 @@ As distribuições foram analisadas e ajustadas para excluir outliers, como no c
 
 | Modelo                   | AUC   | Precisão  | Recall    | KS       |  
 |--------------------------|-------|-----------|-----------|----------|  
-| Random Forest            | 0.83  | 98%       | 36%       | 0.97     |  
+| **Random Forest**        | **0.83** | **98%**| **36%**  | **0.97**     |  
 | Decision Tree            | 0.75  | 97%       | 37%       | 0.94     |  
 | Logistic Regression      | 0.58  | 55%       | 58%       | 0.13     |  
 | KNN                      | 0.71  | 90%       | 45%       | 0.81     |  
