@@ -25,7 +25,7 @@ O projeto aborda um problema crítico enfrentado pelo setor financeiro: **identi
 ### **Distribuição das Variáveis Quantitativas**  
 As distribuições foram analisadas e ajustadas para excluir outliers, como no caso de `Rendimento_Anual`, onde valores extremos acima de R$ 700.000 foram tratados.  
 
-![Boxplot de Rendimento](img/rendimento anual_bank.png)  
+![Boxplot de Rendimento](https://github.com/HammadN98/analise_de_credito_bancario/blob/main/img/rendimento%20anual_bank.png)  
 
 ---
 
