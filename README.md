@@ -1,50 +1,50 @@
+# Concessão de Crédito - Análise de Inadimplência  
 
-# Análise de crédito bancário  
+## **Visão Geral**  
+O projeto aborda um problema crítico enfrentado pelo setor financeiro: **identificar clientes com maior risco de inadimplência** no contexto da concessão de crédito. Utilizando técnicas avançadas de análise de dados e machine learning, desenvolvemos um pipeline robusto que integra limpeza de dados, feature engineering e modelagem preditiva. O objetivo é oferecer ao Banco Byte Bank insights acionáveis para minimizar riscos e otimizar a rentabilidade.  
 
+---
 
-## Descrição
+## **Objetivos do Projeto**  
+- Identificar os principais fatores que influenciam a inadimplência.  
+- Construir modelos preditivos para categorizar clientes como "bons" ou "maus pagadores".  
+- Fornecer recomendações acionáveis para reduzir perdas financeiras.  
 
-Este projeto de análise de crédito bancário para simular o sistema de verificação de empréstimo bancário, é composto por uma análise de dados, pela exploração de dados e de modelos de machine learning. Assim como um modelo colocado em produção e pronto para ser usado.
+---
 
-## Conjunto de dados
+## **Estrutura de Dados e Limpeza**  
 
-O conjunto de dados utilizado foi disponibilizados pela Alura, link abaixo.
+### **Características do Dataset**  
+| **Coluna**               | **Tipo**      | **Descrição**                         |  
+|--------------------------|---------------|---------------------------------------|  
+| ID_Cliente               | Numérica      | Identificador único do cliente.       |  
+| Rendimento_Anual         | Contínua      | Rendimento anual reportado (em R$).   |  
+| Anos_empregado           | Contínua      | Tempo de trabalho atual (anos).       |  
+| Faixa_atraso             | Categórica    | Faixa de atraso de pagamento.         |  
 
-https://raw.githubusercontent.com/alura-cursos/Avaliacao_Credito/main/dados/clientes_cadastrados.csv
+### **Distribuição das Variáveis Quantitativas**  
+As distribuições foram analisadas e ajustadas para excluir outliers, como no caso de `Rendimento_Anual`, onde valores extremos acima de R$ 700.000 foram tratados.  
 
+![Boxplot de Rendimento](https://via.placeholder.com/600x400)  
 
-## Aplicação
+---
 
-Para usar a aplicação acesse:
- 
-```bash
-  https://analise-bancaria.onrender.com
-```
+## **Metodologia e Pipeline de Machine Learning**  
 
+1. **Limpeza de Dados**:  
+   - Remoção de duplicatas e valores irrelevantes.  
+   - Substituição de valores inconsistentes, como `-1000.7 anos de trabalho` para `-1` para marcar pensionistas.  
 
+2. **Transformações**:  
+   - Codificação de variáveis categóricas usando OneHotEncoder.  
+   - Normalização de variáveis contínuas com MinMaxScaler.  
 
-## Demonstração
+3. **Modelos Avaliados**:  
+   - **Random Forest**  
+   - **Decision Tree**  
+   - **KNN**  
+   - **Logistic Regression**  
 
-**Em construção**
+4. **Balanceamento**:  
+   Utilizamos **SMOTE** para lidar com 
 
-
-## Apêndice
-
-Notebook 1: <a href="hhttps://github.com/HammadN98/analise_de_credito_bancario/blob/main/notebooks/Analise.ipynb">Analises</a>
-
-    O objetivo deste notebook era fazer a análise dos dados, 
-    a extração de insights e o entendimento de negócio.
-
-
-
-Notebook 2: <a href="https://github.com/HammadN98/analise_de_credito_bancario/blob/main/notebooks/Modelos.ipynb">Modelos</a>
-
-
-
-## Conclusão
-
-**Em construção**
-## Aprendizados
-
-  * Utilizar o framework streamlit
-**Em construção**
