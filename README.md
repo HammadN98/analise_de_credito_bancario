@@ -71,12 +71,12 @@ A maior parte dos atrasos foi registrada na faixa de **1-29 dias**, indicando qu
 | Pagamento Realizado      | 442.031               | 42%        |  
 | 1-29 dias                | 383.120               | 37%        |  
 
-![Distribuição de Atrasos](https://via.placeholder.com/600x400)  
+![Distribuição de Atrasos](https://github.com/HammadN98/analise_de_credito_bancario/blob/main/img/atraso_bank.png)  
 
 ### **Análise Vintage: Taxa de Inadimplência ao Longo do Tempo**  
 Clientes com maior tempo de relacionamento (MOB > 10 meses) apresentaram aumento na inadimplência.  
 
-![Curva Vintage](https://via.placeholder.com/600x400)  
+![Curva Vintage](https://github.com/HammadN98/analise_de_credito_bancario/blob/main/img/mob_bank.png)  
 
 ---
 
