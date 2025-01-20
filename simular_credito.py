@@ -99,7 +99,8 @@ with st.expander('Família'):
 with st.expander('Pessoal'):
     col3, col4 = st.columns(2)
     dict_respostas['Grau_Escolaridade'] = col3.selectbox(
-        'Qual seu grau de escolaridade?', lista_campos['Grau_Escolaridade']
+        'Qual seu grau de escolaridade?', lista_campos['Grau_Escolaridade'], 
+        key='grau_escolaridade'
     )
     dict_respostas['Idade'] = col4.slider(
         'Qual sua idade?', min_value=1, max_value=100, step=1
