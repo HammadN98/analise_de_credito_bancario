@@ -63,79 +63,44 @@ with st.expander('Pessoal'):
         'Qual seu grau de escolaridade?', lista_campos['Grau_Escolaridade']
     )
     dict_respostas['Idade'] = col4.slider(
-        'Qual sua idade?', min_value=1, max_value=100, step=1
+        'Qual sua idade?', min_value=1, max_value=100, step=1, key='idade'
     )
+
     dict_respostas['Tem_Carro'] = 1 if col3.selectbox(
-        'Você possui um carro?', ['Sim', 'Não']
+        'Você possui um carro?', ['Sim', 'Não'], key='tem_carro'
     ) == 'Sim' else 0
+
     dict_respostas['Tem_telefone_fixo'] = 1 if col4.selectbox(
-        'Você possui telefone fixo?', ['Sim', 'Não']
+        'Você possui telefone fixo?', ['Sim', 'Não'], key='tem_telefone_fixo'
     ) == 'Sim' else 0
+
     dict_respostas['Tem_email'] = 1 if col3.selectbox(
-        'Você possui um e-mail?', ['Sim', 'Não']
+        'Você possui um e-mail?', ['Sim', 'Não'], key='tem_email'
     ) == 'Sim' else 0
+
     dict_respostas['Estado_Civil'] = col4.selectbox(
-        'Qual seu estado civil?', lista_campos['Estado_Civil']
-    )
-
-
-with st.expander('Família'):
-    col5, col6 = st.columns(2)
-    dict_respostas['Moradia'] = col5.selectbox(
-        'Qual o tipo de moradia?', lista_campos['Moradia']
-    )
-    dict_respostas['Tamanho_Familia'] = col6.slider(
-        'Quantas pessoas estão na sua família?', min_value=0, max_value=10, step=1
-    )
-    dict_respostas['Tem_Casa_Propria'] = 1 if col5.selectbox(
-        'Você possui casa própria?', ['Sim', 'Não']
-    ) == 'Sim' else 0
-    dict_respostas['Qtd_Filhos'] = col6.slider(
-        'Quantos filhos você possui?', min_value=0, max_value=10, step=1
-    )
-
-
-
-with st.expander('Pessoal'):
-    col3, col4 = st.columns(2)
-    dict_respostas['Grau_Escolaridade'] = col3.selectbox(
-        'Qual seu grau de escolaridade?', lista_campos['Grau_Escolaridade'], 
-        key='grau_escolaridade'
-    )
-    dict_respostas['Idade'] = col4.slider(
-        'Qual sua idade?', min_value=1, max_value=100, step=1
-    )
-    dict_respostas['Tem_Carro'] = 1 if col3.selectbox(
-        'Você possui um carro?', ['Sim', 'Não']
-    ) == 'Sim' else 0
-    dict_respostas['Tem_telefone_fixo'] = 1 if col4.selectbox(
-        'Você possui telefone fixo?', ['Sim', 'Não']
-    ) == 'Sim' else 0
-    dict_respostas['Tem_email'] = 1 if col3.selectbox(
-        'Você possui um e-mail?', ['Sim', 'Não']
-    ) == 'Sim' else 0
-    dict_respostas['Estado_Civil'] = col4.selectbox(
-        'Qual seu estado civil?', lista_campos['Estado_Civil']
+        'Qual seu estado civil?', lista_campos['Estado_Civil'], key='estado_civil'
     )
 
 # Expansor 'Família'
 with st.expander('Família'):
     col5, col6 = st.columns(2)
+
     dict_respostas['Moradia'] = col5.selectbox(
-        'Qual o tipo de moradia?', lista_campos['Moradia']
+        'Qual o tipo de moradia?', lista_campos['Moradia'], key='moradia'
     )
+
     dict_respostas['Tamanho_Familia'] = col6.slider(
-        'Quantas pessoas estão na sua família?', min_value=0, max_value=10, step=1
+        'Quantas pessoas estão na sua família?', min_value=0, max_value=10, step=1, key='tamanho_familia'
     )
+
     dict_respostas['Tem_Casa_Propria'] = 1 if col5.selectbox(
-        'Você possui casa própria?', ['Sim', 'Não']
+        'Você possui casa própria?', ['Sim', 'Não'], key='tem_casa_propria'
     ) == 'Sim' else 0
+
     dict_respostas['Qtd_Filhos'] = col6.slider(
-        'Quantos filhos você possui?', min_value=0, max_value=10, step=1
+        'Quantos filhos você possui?', min_value=0, max_value=10, step=1, key='qtd_filhos'
     )
-
-
-
 if st.button('Avaliar crédito'):
     resultado = avaliar_mau(dict_respostas)
     if resultado is None:
