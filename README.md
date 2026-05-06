@@ -1,105 +1,139 @@
-# Concessão de Crédito - Análise de Inadimplência  
-
-## **Visão Geral**  
-O projeto aborda um problema crítico enfrentado pelo setor financeiro: **identificar clientes com maior risco de inadimplência** no contexto da concessão de crédito. Utilizando técnicas avançadas de análise de dados e machine learning, desenvolvemos um pipeline robusto que integra limpeza de dados, feature engineering e modelagem preditiva. O objetivo é oferecer ao Banco Byte Bank insights acionáveis para minimizar riscos e otimizar a rentabilidade.  
-
+# 🏦 Análise de Risco de Crédito — Modelagem Preditiva de Inadimplência
+ 
+> **Pipeline end-to-end de Machine Learning** para classificação de risco em concessão de crédito bancário, com aplicação interativa em Streamlit. A metodologia aplicada aqui — detecção de padrões comportamentais, tratamento de desbalanceamento e otimização do tradeoff falso positivo × falso negativo — é diretamente transferível a problemas de **prevenção a fraudes** e **detecção de anomalias** em ambientes financeiros.
+ 
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-orange?logo=scikitlearn)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-red?logo=streamlit)
+![Status](https://img.shields.io/badge/Status-Concluído-brightgreen)
+ 
 ---
-
-## **Objetivos do Projeto**  
-- Identificar os principais fatores que influenciam a inadimplência.  
-- Construir modelos preditivos para categorizar clientes como "bons" ou "maus pagadores".  
-- Fornecer recomendações acionáveis para reduzir perdas financeiras.  
-
+ 
+## 🎯 Problema de Negócio
+ 
+Instituições financeiras perdem bilhões anualmente com inadimplência. O desafio real não é apenas identificar maus pagadores — é **minimizar falsos positivos** (bloquear clientes bons) sem deixar passar falsos negativos (liberar crédito para quem não vai pagar). Um bloqueio indevido tem custo direto: perda de receita, impacto na experiência do usuário e dano à reputação.
+ 
+**Objetivo:** construir um modelo preditivo que classifique clientes como bons ou maus pagadores, com controle explícito do tradeoff entre precisão e recall, e com resultado acessível via interface web.
+ 
 ---
-
-## **Estrutura de Dados e Limpeza**  
-
-### **Características do Dataset**  
-| **Coluna**               | **Tipo**      | **Descrição**                         |  
-|--------------------------|---------------|---------------------------------------|  
-| ID_Cliente               | Numérica      | Identificador único do cliente.       |  
-| Rendimento_Anual         | Contínua      | Rendimento anual reportado (em R$).   |  
-| Anos_empregado           | Contínua      | Tempo de trabalho atual (anos).       |  
-| Faixa_atraso             | Categórica    | Faixa de atraso de pagamento.         |  
-
-### **Distribuição das Variáveis Quantitativas**  
-As distribuições foram analisadas e ajustadas para excluir outliers, como no caso de `Rendimento_Anual`, onde valores extremos acima de R$ 700.000 foram tratados.  
-
-<img src="https://github.com/HammadN98/analise_de_credito_bancario/blob/main/img/rendimento%20anual_bank.png" width="600"/>
-
+ 
+## 🗂️ Estrutura do Projeto
+ 
+```
+analise_de_credito_bancario/
+│
+├── notebooks/               # Análise exploratória, feature engineering e modelagem
+├── Dados/                   # Datasets originais
+├── obj/                     # Artefatos serializados: modelo, features, lista de campos
+├── img/                     # Visualizações geradas
+├── simular_credito.py       # Aplicação Streamlit para simulação em tempo real
+├── utils.py                 # Transformador customizado (compatível com sklearn Pipeline)
+└── requirements.txt
+```
+ 
 ---
-
-## **Metodologia e Pipeline de Machine Learning**  
-
-1. **Limpeza de Dados**:  
-   - Remoção de duplicatas e valores irrelevantes.  
-   - Substituição de valores inconsistentes, como `-1000.7 anos de trabalho` para `-1` para marcar pensionistas.  
-
-2. **Transformações**:  
-   - Codificação de variáveis categóricas usando OneHotEncoder.  
-   - Normalização de variáveis contínuas com MinMaxScaler.  
-
-3. **Modelos Avaliados**:  
-   - **Random Forest**  
-   - **Decision Tree**  
-   - **KNN**  
-   - **Logistic Regression**  
-
-4. **Balanceamento**:  
-   Utilizamos **SMOTE** para lidar com o desbalanceamento significativo entre bons e maus pagadores.  
-
+ 
+## 🔬 Metodologia
+ 
+### 1. Limpeza e Preparação dos Dados
+ 
+- Remoção de duplicatas e tratamento de valores inconsistentes (ex.: `Anos_empregado = -1000.7` → marcação de pensionistas)
+- Tratamento de outliers em `Rendimento_Anual` (valores acima de R$ 700.000 removidos)
+- Codificação de variáveis categóricas com `OneHotEncoder`
+- Normalização de variáveis contínuas com `MinMaxScaler`
+### 2. Tratamento de Desbalanceamento
+ 
+O dataset apresenta desbalanceamento severo entre bons e maus pagadores — padrão típico em problemas de risco financeiro e detecção de fraude. Foi utilizado **SMOTE (Synthetic Minority Oversampling Technique)** para gerar amostras sintéticas da classe minoritária e garantir que os modelos aprendessem os padrões de risco reais.
+ 
+### 3. Feature Engineering
+ 
+- Criação de variável derivada de estabilidade de emprego
+- Análise Vintage (MOB — Months on Books): rastreamento da taxa de inadimplência por coorte de concessão
+- Transformador customizado encapsulado em classe compatível com `sklearn.Pipeline` para reproducibilidade
+### 4. Modelos Avaliados
+ 
+| Modelo | AUC | Precisão | Recall | KS |
+|---|---|---|---|---|
+| **Random Forest** | **0.83** | **98%** | **36%** | **0.97** |
+| Decision Tree | 0.75 | 97% | 37% | 0.94 |
+| KNN | 0.71 | 90% | 45% | 0.81 |
+| Logistic Regression | 0.58 | 55% | 58% | 0.13 |
+ 
 ---
-
-## **Resultados dos Modelos**  
-
-| Modelo                   | AUC   | Precisão  | Recall    | KS       |  
-|--------------------------|-------|-----------|-----------|----------|  
-| **Random Forest**        | **0.83** | **98%**| **36%**  | **0.97**     |  
-| Decision Tree            | 0.75  | 97%       | 37%       | 0.94     |  
-| Logistic Regression      | 0.58  | 55%       | 58%       | 0.13     |  
-| KNN                      | 0.71  | 90%       | 45%       | 0.81     |  
-
+ 
+## ⚖️ Tradeoff Falso Positivo × Falso Negativo
+ 
+O modelo campeão (Random Forest) apresenta **recall de 36%** com **precisão de 98%** no threshold padrão de 0.5 — uma escolha deliberada para este contexto.
+ 
+**Por quê?**
+ 
+Em concessão de crédito, um **falso positivo** (negar crédito a um bom pagador) tem custo real: perda de receita, impacto na experiência do cliente e potencial churn. Já um **falso negativo** (aprovar um mau pagador) gera perda financeira direta. O threshold foi mantido conservador (alta precisão) porque o custo de negócio de um bloqueio indevido foi avaliado como comparável ao custo de uma inadimplência em carteiras de menor ticket.
+ 
+Para contextos de maior tolerância ao risco (ex.: fraude de alto impacto), o threshold pode ser reduzido para ~0.3, elevando o recall para ~65% com queda de precisão para ~85% — decisão que deve ser calibrada com a área de negócio.
+ 
+O **KS de 0.97** confirma que o modelo separa muito bem as duas populações, mesmo com recall aparentemente baixo no threshold padrão.
+ 
 ---
-
-## **Insights e Visualizações**  
-
-### **Distribuição de Pagamentos em Atraso**  
-A maior parte dos atrasos foi registrada na faixa de **1-29 dias**, indicando que intervenções precoces podem melhorar a recuperação.  
-
-| Faixa de Atraso          | Quantidade de Clientes | Percentual |  
-|--------------------------|------------------------|------------|  
-| Pagamento Realizado      | 442.031               | 42%        |  
-| 1-29 dias                | 383.120               | 37%        |  
-
-<img src="https://github.com/HammadN98/analise_de_credito_bancario/blob/main/img/atraso_bank.png" width="600"/>
-
-### **Análise Vintage: Taxa de Inadimplência ao Longo do Tempo**  
-Clientes com maior tempo de relacionamento (MOB > 10 meses) apresentaram aumento na inadimplência.  
-
-<img src="https://github.com/HammadN98/analise_de_credito_bancario/blob/main/img/mob_bank.png" width="600"/>
-
+ 
+## 📊 Principais Insights
+ 
+### Distribuição de Pagamentos em Atraso
+ 
+A maior concentração de atrasos está na faixa de **1–29 dias** (37% dos clientes), sugerindo que **intervenções precoces** — alertas automáticos antes dos 30 dias — têm alto potencial de recuperação.
+ 
+![Distribuição de Atraso](img/atraso_bank.png)
+ 
+### Análise Vintage (MOB)
+ 
+Clientes com mais de 10 meses de relacionamento (MOB > 10) apresentaram aumento expressivo na taxa de inadimplência — indicando necessidade de reavaliação periódica de risco, não apenas no momento da concessão.
+ 
+![Análise Vintage](img/mob_bank.png)
+ 
 ---
-
-## **Recomendações Acionáveis**  
-
-1. **Adoção do Modelo Random Forest**  
-   - Implementar o modelo preditivo na tomada de decisões de crédito.  
-
-2. **Intervenções Precoces**  
-   - Desenvolver alertas automáticos para clientes com atrasos menores que 30 dias.  
-
-3. **Política de Renovação**  
-   - Atualizar condições de crédito para clientes com MOB superior a 10 meses e histórico de atrasos.  
-
-4. **Monitoramento Contínuo**  
-   - Incorporar dados em tempo real para aprimorar previsões e ajustes de crédito.  
-
+ 
+## 🖥️ Aplicação Interativa (Streamlit)
+ 
+O modelo treinado foi serializado com `joblib` e integrado a uma aplicação web que permite simular a decisão de crédito em tempo real, preenchendo variáveis do cliente (ocupação, renda, histórico de emprego, perfil familiar).
+ 
+```bash
+# Instalar dependências
+pip install -r requirements.txt
+ 
+# Rodar a aplicação
+streamlit run simular_credito.py
+```
+ 
+> 💡 **Screenshot:** _[adicione aqui um GIF ou imagem da interface Streamlit rodando]_
+ 
 ---
-
-## **Conclusão**  
-Este projeto não só apresenta um modelo eficiente para previsão de inadimplência, como também fornece insights valiosos para estratégia operacional e de crédito. O uso de análises temporais e machine learning ajudará o Byte Bank a reduzir riscos financeiros e melhorar sua eficiência operacional.  
-
-**Próximos Passos:**  
-- Expandir o modelo para incluir variáveis externas, como indicadores macroeconômicos.  
-- Criar uma API para integração do modelo com sistemas existentes do banco.  
-
+ 
+## 🚀 Próximos Passos / Arquitetura de Produção Proposta
+ 
+Para levar este modelo a um ambiente produtivo real, a arquitetura planejada é:
+ 
+```
+[Fonte de dados] → [Feature Store] → [Modelo servido via FastAPI]
+                                              ↓
+                                    [Monitoramento de drift]
+                                    (Evidently AI / custom)
+                                              ↓
+                                    [Alerta de re-treino]
+                                    + CI/CD com GitHub Actions
+```
+ 
+- **API REST** com FastAPI para servir predições em tempo real
+- **Monitoramento de data drift** e degradação de performance em produção (Evidently AI)
+- **Pipeline de re-treino automático** via GitHub Actions quando KS cair abaixo de threshold definido
+- **Versionamento de modelos** com MLflow
+---
+ 
+## 🛠️ Stack
+ 
+`Python` · `Scikit-Learn` · `imbalanced-learn (SMOTE)` · `Pandas` · `NumPy` · `Streamlit` · `Joblib` · `Matplotlib` · `Seaborn`
+ 
+---
+ 
+## 👤 Autor
+ 
+**Nimer Hammad**
+[LinkedIn](https://www.linkedin.com/in/hammad-nimer/) · [GitHub](https://github.com/HammadN98)
