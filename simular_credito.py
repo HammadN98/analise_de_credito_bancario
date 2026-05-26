@@ -1,7 +1,36 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import json
 from joblib import load
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
+
+# ------------------------------------------------------------
+# Definição da classe Transformador (idêntica à do treino)
+# ------------------------------------------------------------
+class Transformador(BaseEstimator, TransformerMixin):
+    def __init__(self, colunas_quantitativas, colunas_categoricas):
+        self.colunas_quantitativas = colunas_quantitativas
+        self.colunas_categoricas = colunas_categoricas
+        self.enc = OneHotEncoder()
+        self.scaler = MinMaxScaler()
+
+    def fit(self, X, y=None):
+        self.enc.fit(X[self.colunas_categoricas])
+        self.scaler.fit(X[self.colunas_quantitativas])
+        return self
+
+    def transform(self, X, y=None):
+        X_categoricas = pd.DataFrame(
+            data=self.enc.transform(X[self.colunas_categoricas]).toarray(),
+            columns=self.enc.get_feature_names_out(self.colunas_categoricas)
+        )
+        X_quantitativas = pd.DataFrame(
+            data=self.scaler.transform(X[self.colunas_quantitativas]),
+            columns=self.colunas_quantitativas
+        )
+        return pd.concat([X_quantitativas, X_categoricas], axis=1)
 
 # ------------------------------------------------------------
 # Função de avaliação de crédito
@@ -14,11 +43,8 @@ def avaliar_mau(dict_respostas):
         st.error(f"Erro ao carregar os arquivos necessários: {e}")
         return None
 
-    # Converter as respostas em DataFrame com as features esperadas
     df = pd.DataFrame([dict_respostas])
-    df = df[features]  # garantir a ordem correta das colunas
-
-    # Predizer probabilidade da classe 'Mau'
+    df = df[features]
     prob = modelo.predict_proba(df)[0, 1]
     classe = "Mau pagador" if prob >= 0.5 else "Bom pagador"
     return prob, classe
@@ -31,7 +57,7 @@ st.title("💳 Simulador de Concessão de Crédito")
 st.markdown("Preencha os dados do cliente para avaliação de risco de inadimplência.")
 
 # ------------------------------------------------------------
-# Carregar listas de opções (campos categóricos não binários)
+# Carregar listas de opções (JSON)
 # ------------------------------------------------------------
 try:
     with open('obj/lista_campos.json', 'r', encoding='utf-8') as f:
@@ -41,10 +67,9 @@ except FileNotFoundError:
     st.stop()
 
 # ------------------------------------------------------------
-# Formulário de entrada
+# Formulário de entrada (idêntico ao anterior)
 # ------------------------------------------------------------
 st.header("Dados do cliente")
-
 col1, col2 = st.columns(2)
 
 with col1:
@@ -66,11 +91,7 @@ with col2:
     anos_empregado = st.number_input("Anos de emprego", min_value=0, max_value=50, value=5)
     tamanho_familia = st.number_input("Tamanho da família", min_value=1, max_value=10, value=2)
 
-# ------------------------------------------------------------
-# Botão de avaliação
-# ------------------------------------------------------------
 if st.button("Avaliar risco de crédito"):
-    # Montar dicionário de respostas
     respostas = {
         'Tem_Carro': 1 if tem_carro == "Sim" else 0,
         'Tem_Casa_Propria': 1 if tem_casa_propria == "Sim" else 0,
