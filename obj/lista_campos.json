@@ -1,0 +1,52 @@
+{
+  "Categoria_de_renda": [
+    "Empregado",
+    "Associado comercial",
+    "Pensionista",
+    "Servidor publico",
+    "Estudante"
+  ],
+  "Grau_Escolaridade": [
+    "Ensino medio",
+    "Ensino superior",
+    "Ensino superior incompleto",
+    "Ensino fundamental",
+    "Pos graduacao"
+  ],
+  "Estado_Civil": [
+    "Casado",
+    "Solteiro",
+    "Separado",
+    "Uniao estavel",
+    "Viuvo"
+  ],
+  "Moradia": [
+    "Casa propria",
+    "Alugado",
+    "Habitacao publica",
+    "Mora com os pais",
+    "Cooperativa habitacional",
+    "Apartamento comercial"
+  ],
+  "Ocupacao": [
+    "Seguranca",
+    "Venda",
+    "Outros",
+    "Contabilidade",
+    "Construcao Civil",
+    "Gerencia",
+    "Motorista",
+    "Equipe principal",
+    "Alta tecnologia",
+    "Limpeza",
+    "Cozinha",
+    "Baixa qualificacao",
+    "Servico privado",
+    "Medicina",
+    "Secretariado",
+    "Garcom",
+    "RH",
+    "TI",
+    "Corretor imobiliario"
+  ]
+}
