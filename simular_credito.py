@@ -44,6 +44,17 @@ def avaliar_mau(dict_respostas):
         return None
 
     df = pd.DataFrame([dict_respostas])
+
+    # DEBUG: mostrar colunas esperadas vs. colunas do formulário
+    st.write("Features esperadas pelo modelo:", features)
+    st.write("Colunas do formulário:", df.columns.tolist())
+
+    # Verificar diferenças
+    faltantes = set(features) - set(df.columns)
+    if faltantes:
+        st.error(f"As seguintes colunas esperadas não estão no formulário: {faltantes}")
+        return None
+
     df = df[features]
     prob = modelo.predict_proba(df)[0, 1]
     classe = "Mau pagador" if prob >= 0.5 else "Bom pagador"
