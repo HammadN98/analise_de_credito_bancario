@@ -52,9 +52,41 @@ def avaliar_mau(dict_respostas):
 # ------------------------------------------------------------
 # Configuração da página
 # ------------------------------------------------------------
-st.set_page_config(page_title="Simulador de Crédito", page_icon="💳")
+st.set_page_config(page_title="Simulador de Crédito", page_icon="💳", layout="wide")
+st.markdown("""
+    <style>
+    .stButton button {
+        background-color: #0A6EBD;
+        color: white;
+        border-radius: 10px;
+        padding: 12px 28px;
+        font-size: 20px;
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+    .stButton button:hover {
+        background-color: #085A9E;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+    .big-text {
+        font-size: 24px;
+        font-weight: 600;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# ------------------------------------------------------------
+# Cabeçalho
+# ------------------------------------------------------------
 st.title("💳 Simulador de Concessão de Crédito")
-st.markdown("Preencha os dados do cliente para avaliação de risco de inadimplência.")
+st.markdown("""
+    <div style="border-left: 4px solid #0A6EBD; padding-left: 16px; margin-bottom: 30px;">
+        <p style="font-size: 18px; color: #555; margin: 0;">
+            Preencha os dados do cliente e obtenha uma avaliação de risco de inadimplência baseada em Machine Learning.
+        </p>
+    </div>
+""", unsafe_allow_html=True)
 
 # ------------------------------------------------------------
 # Carregar listas de opções (JSON)
@@ -67,31 +99,77 @@ except FileNotFoundError:
     st.stop()
 
 # ------------------------------------------------------------
-# Formulário de entrada (idêntico ao anterior)
+# Mapeamento de valores padrão (seus dados)
 # ------------------------------------------------------------
-st.header("Dados do cliente")
+default_categoria_renda = "Working"
+default_grau_escolaridade = "Academic degree"
+default_estado_civil = "Single / not married"
+default_moradia = "House / apartment"
+default_ocupacao = "Managers"
+
+# Função auxiliar para obter índice seguro
+def get_index(lista, valor):
+    try:
+        return lista.index(valor)
+    except ValueError:
+        return 0
+
+# ------------------------------------------------------------
+# Formulário organizado em seções (design aplicado)
+# ------------------------------------------------------------
+st.subheader("📋 Dados Pessoais")
 col1, col2 = st.columns(2)
 
 with col1:
-    tem_carro = st.selectbox("Possui carro?", ("Sim", "Não"))
-    tem_casa_propria = st.selectbox("Possui casa própria?", ("Sim", "Não"))
-    categoria_renda = st.selectbox("Categoria de renda", lista_campos['Categoria_de_renda'])
-    grau_escolaridade = st.selectbox("Grau de escolaridade", lista_campos['Grau_Escolaridade'])
-    estado_civil = st.selectbox("Estado civil", lista_campos['Estado_Civil'])
-    moradia = st.selectbox("Tipo de moradia", lista_campos['Moradia'])
-
-with col2:
-    tem_telefone_trabalho = st.selectbox("Possui telefone do trabalho?", ("Sim", "Não"))
-    tem_telefone_fixo = st.selectbox("Possui telefone fixo?", ("Sim", "Não"))
-    tem_email = st.selectbox("Possui e-mail?", ("Sim", "Não"))
-    ocupacao = st.selectbox("Ocupação", lista_campos['Ocupacao'])
     idade = st.number_input("Idade", min_value=18, max_value=100, value=27)
+    estado_civil = st.selectbox("Estado civil",
+                                lista_campos['Estado_Civil'],
+                                index=get_index(lista_campos['Estado_Civil'], default_estado_civil))
     qtd_filhos = st.number_input("Quantos filhos possui?", min_value=0, max_value=10, value=0)
-    rendimento_anual = st.number_input("Rendimento anual (R$)", min_value=0.0, value=33000.0, step=1000.0)
-    anos_empregado = st.number_input("Anos de emprego", min_value=0, max_value=50, value=1)
     tamanho_familia = st.number_input("Tamanho da família", min_value=1, max_value=10, value=5)
 
-if st.button("Avaliar risco de crédito"):
+with col2:
+    grau_escolaridade = st.selectbox("Grau de escolaridade",
+                                     lista_campos['Grau_Escolaridade'],
+                                     index=get_index(lista_campos['Grau_Escolaridade'], default_grau_escolaridade))
+    moradia = st.selectbox("Tipo de moradia",
+                           lista_campos['Moradia'],
+                           index=get_index(lista_campos['Moradia'], default_moradia))
+    tem_carro = st.selectbox("Possui carro?", ("Sim", "Não"), index=1)   # 1 = "Não"
+    tem_casa_propria = st.selectbox("Possui casa própria?", ("Sim", "Não"), index=0) # 0 = "Sim"
+
+st.subheader("💼 Dados Profissionais")
+col3, col4 = st.columns(2)
+
+with col3:
+    categoria_renda = st.selectbox("Categoria de renda",
+                                   lista_campos['Categoria_de_renda'],
+                                   index=get_index(lista_campos['Categoria_de_renda'], default_categoria_renda))
+    rendimento_anual = st.number_input("Rendimento anual (R$)",
+                                       min_value=0.0, value=50400.0, step=1000.0,
+                                       help="Renda mensal de R$4.200,00 equivale a R$50.400,00 anuais")
+    anos_empregado = st.number_input("Anos de emprego", min_value=0, max_value=50, value=1)
+
+with col4:
+    ocupacao = st.selectbox("Ocupação",
+                            lista_campos['Ocupacao'],
+                            index=get_index(lista_campos['Ocupacao'], default_ocupacao))
+    tem_telefone_trabalho = st.selectbox("Possui telefone do trabalho?", ("Sim", "Não"), index=1)
+    tem_telefone_fixo = st.selectbox("Possui telefone fixo?", ("Sim", "Não"), index=1)
+    tem_email = st.selectbox("Possui e-mail?", ("Sim", "Não"), index=0)
+
+# ------------------------------------------------------------
+# Botão de ação (Lei de Fitts: grande e centralizado)
+# ------------------------------------------------------------
+st.markdown("<br>", unsafe_allow_html=True)
+col_btn, _, _ = st.columns([2, 1, 1])  # coluna centralizada
+with col_btn:
+    avaliar = st.button("🔍 Avaliar risco de crédito", use_container_width=True)
+
+# ------------------------------------------------------------
+# Processamento e resultado
+# ------------------------------------------------------------
+if avaliar:
     respostas = {
         'Tem_Carro': 1 if tem_carro == "Sim" else 0,
         'Tem_Casa_Propria': 1 if tem_casa_propria == "Sim" else 0,
@@ -116,10 +194,18 @@ if st.button("Avaliar risco de crédito"):
         st.error("Erro durante a avaliação. Verifique se os arquivos do modelo estão presentes.")
     else:
         prob, classe = resultado
-        st.subheader("Resultado da análise:")
-        st.write(f"Probabilidade de inadimplência: **{prob:.2%}**")
-        if classe == "Mau pagador":
-            st.error(f"Classificação: {classe} - **Crédito NEGADO**")
-        else:
-            st.success(f"Classificação: {classe} - **Crédito APROVADO**")
-        st.caption("Este é um modelo de aprendizado. As decisões reais devem considerar políticas de negócio e análise humana.")
+        # Container de resultado com destaque (contraste e alinhamento)
+        with st.container():
+            st.markdown("---")
+            st.subheader("📊 Resultado da Análise")
+            col_res, _ = st.columns([3, 1])
+
+            with col_res:
+                if classe == "Mau pagador":
+                    st.error(f"**Probabilidade de inadimplência:** {prob:.2%}")
+                    st.markdown("### ❌ Classificação: **Mau pagador – Crédito NEGADO**")
+                else:
+                    st.success(f"**Probabilidade de inadimplência:** {prob:.2%}")
+                    st.markdown("### ✅ Classificação: **Bom pagador – Crédito APROVADO**")
+
+                st.caption("ℹ️ Modelo de aprendizado. Decisões reais devem considerar políticas de negócio e análise humana.")
