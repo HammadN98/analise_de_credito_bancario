@@ -209,3 +209,14 @@ if avaliar:
                     st.markdown("### ✅ Classificação: **Bom pagador – Crédito APROVADO**")
 
                 st.caption("ℹ️ Modelo de aprendizado. Decisões reais devem considerar políticas de negócio e análise humana.")
+
+# ------------------------------------------------------------
+# Rodapé
+# ------------------------------------------------------------
+st.markdown("---")
+st.markdown(
+    "<p style='text-align: center; color: #888; font-size: 14px;'>"
+    "REPAGINANDO UM PROJETO DE 2022"
+    "</p>",
+    unsafe_allow_html=True
+)
