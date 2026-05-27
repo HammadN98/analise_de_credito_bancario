@@ -85,11 +85,11 @@ with col2:
     tem_telefone_fixo = st.selectbox("Possui telefone fixo?", ("Sim", "Não"))
     tem_email = st.selectbox("Possui e-mail?", ("Sim", "Não"))
     ocupacao = st.selectbox("Ocupação", lista_campos['Ocupacao'])
-    idade = st.number_input("Idade", min_value=18, max_value=100, value=30)
+    idade = st.number_input("Idade", min_value=18, max_value=100, value=27)
     qtd_filhos = st.number_input("Quantos filhos possui?", min_value=0, max_value=10, value=0)
-    rendimento_anual = st.number_input("Rendimento anual (R$)", min_value=0.0, value=50000.0, step=1000.0)
-    anos_empregado = st.number_input("Anos de emprego", min_value=0, max_value=50, value=5)
-    tamanho_familia = st.number_input("Tamanho da família", min_value=1, max_value=10, value=2)
+    rendimento_anual = st.number_input("Rendimento anual (R$)", min_value=0.0, value=33000.0, step=1000.0)
+    anos_empregado = st.number_input("Anos de emprego", min_value=0, max_value=50, value=1)
+    tamanho_familia = st.number_input("Tamanho da família", min_value=1, max_value=10, value=5)
 
 if st.button("Avaliar risco de crédito"):
     respostas = {
